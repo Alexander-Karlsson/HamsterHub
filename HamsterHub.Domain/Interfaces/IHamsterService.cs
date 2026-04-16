@@ -11,4 +11,5 @@ public interface IHamsterService
     Task UpdateAsync(Hamster hamster);
     Task DeleteAsync(int id);
     Task<IEnumerable<Hamster>> GetByPersonalityAsync(Personality personality);
+    Task<Hamster?> GetCheapestAvailableAsync();
 }

@@ -34,4 +34,35 @@ public class BookingRepository(HamsterDbContext db) : IBookingRepository
         db.Bookings.Remove(booking);
         await db.SaveChangesAsync();
     }
+
+    // Övrig hantering -----------------
+    public async Task<IEnumerable<Booking>> GetBookingByCustomerNameAsync(string customerName)
+    {
+        var bookings = db.Bookings.Where(b => b.CustomerName.Contains(customerName));
+        var result = await bookings.ToListAsync();
+        if (result.Count == 0)
+            throw new KeyNotFoundException($"Bokning för {customerName} hittades inte...");
+
+        return result;
+    }
+
+    public async Task<IEnumerable<Booking>> GetBookingByDateAsync(DateTime date)
+    {
+        var bookings = db.Bookings.Where(b => b.StartDate >= date && b.EndDate <= date);
+        var result = await bookings.ToListAsync();
+        if(result.Count == 0)
+            throw new KeyNotFoundException($"Hittade inga bokningar på {date}...");
+
+        return result;
+    }
+    
+    public async Task<IEnumerable<Booking>> GetBookingsByHamsterIdAsync(int hamsterId)
+    {
+        var bookings = db.Bookings.Where(b => b.HamsterId == hamsterId);
+        var result = await bookings.ToListAsync();
+        if (result.Count == 0)
+            throw new KeyNotFoundException("Hittade inga bokingar för den angivna hamstern...");
+
+        return result;
+    }
 }

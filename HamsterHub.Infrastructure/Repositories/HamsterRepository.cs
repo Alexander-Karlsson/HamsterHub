@@ -1,4 +1,5 @@
 using HamsterHub.Domain.Entities;
+using HamsterHub.Domain.Enums;
 using HamsterHub.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,5 +36,30 @@ public class HamsterRepository(HamsterDbContext db) : IHamsterRepository
         
         db.Hamsters.Remove(hamster);
         await db.SaveChangesAsync();
+    }
+    
+    // Övrig hantering -----------------
+    public async Task<IEnumerable<Hamster>> GetByPersonalityAsync(Personality personality)
+    {
+        var result = await db.Hamsters
+            .AsNoTracking()
+            .Where(h => h.Personality == personality)
+            .ToListAsync();
+        
+        if (result.Count == 0)
+            throw new ArgumentException($"Ingen hamster med personligheten '{personality}' hittades...");
+
+        return result;
+    }
+    
+    public async Task<Hamster?> GetCheapestAvailableAsync()
+    {
+        var hamsters = await db.Hamsters
+            .AsNoTracking()
+            .Where(h => h.IsAvailable)
+            .OrderBy(h => h.PricePerDay)
+            .FirstOrDefaultAsync();
+        
+        return hamsters;
     }
 }

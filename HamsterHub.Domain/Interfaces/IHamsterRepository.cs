@@ -1,4 +1,5 @@
 using HamsterHub.Domain.Entities;
+using HamsterHub.Domain.Enums;
 
 namespace HamsterHub.Domain.Interfaces;
 
@@ -10,4 +11,9 @@ public interface IHamsterRepository
     Task AddAsync(Hamster hamster);
     Task UpdateAsync(Hamster hamster);
     Task DeleteAsync(int id);
+    
+    // Övrig hantering -----------------
+    Task<IEnumerable<Hamster>> GetByPersonalityAsync(Personality personality);
+    Task<Hamster?> GetCheapestAvailableAsync();
+    
 }
