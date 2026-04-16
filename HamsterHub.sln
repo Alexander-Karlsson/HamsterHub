@@ -11,6 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamsterHub.Domain", "Hamste
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HamsterHub.Infrastructure", "HamsterHub.Infrastructure\HamsterHub.Infrastructure.csproj", "{B639BDE5-421C-4D46-8861-774AD7B9D955}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Domain", "1. Domain", "{C7C16283-6898-4652-BC54-5864B24647D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Application", "2. Application", "{4BD9DE05-558F-4882-92C2-D8FE773FD7C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Infrastructure", "3. Infrastructure", "{BBCA96EE-F46A-43EA-96F7-84396CA6DBA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. API", "4. API", "{6EAA6AC2-F5AC-4D9E-9F20-0A9522E0E878}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +80,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{01E24F0B-6BFA-4DB5-9E29-C8EA33EE9D51} = {C7C16283-6898-4652-BC54-5864B24647D3}
+		{5D2959BD-1CE7-4114-B9C6-1BC1A64733EC} = {4BD9DE05-558F-4882-92C2-D8FE773FD7C2}
+		{B639BDE5-421C-4D46-8861-774AD7B9D955} = {BBCA96EE-F46A-43EA-96F7-84396CA6DBA2}
+		{CAD018AE-B5C4-49C4-A217-413C4BE8334E} = {6EAA6AC2-F5AC-4D9E-9F20-0A9522E0E878}
 	EndGlobalSection
 EndGlobal
