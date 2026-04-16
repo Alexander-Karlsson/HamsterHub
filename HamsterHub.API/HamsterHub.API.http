@@ -1,0 +1,6 @@
+@HamsterHub.API_HostAddress = http://localhost:5109
+
+GET {{HamsterHub.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
