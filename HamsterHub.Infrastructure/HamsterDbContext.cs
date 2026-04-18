@@ -7,4 +7,12 @@ public class HamsterDbContext(DbContextOptions<HamsterDbContext> options) : DbCo
 {
     public DbSet<Hamster> Hamsters { get; set; }
     public DbSet<Booking> Bookings { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Hamster>()
+            .Property(h => h.PricePerDay)
+            .HasPrecision(18, 2);
+    }
 }
+

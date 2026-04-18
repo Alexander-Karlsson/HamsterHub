@@ -13,11 +13,13 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<HamsterDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ORSAK: Skapar scope för mina Repositories
+// ORSAK: Skapar scope för mina Repositories och services
+
+// Repositories -----
 builder.Services.AddScoped<IHamsterRepository, HamsterRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 
-// ORSAK: Skapar scope för mina Services
+// Services -----
 builder.Services.AddScoped<IHamsterService, HamsterService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 
