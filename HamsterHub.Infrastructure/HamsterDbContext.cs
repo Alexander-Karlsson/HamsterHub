@@ -10,9 +10,8 @@ public class HamsterDbContext(DbContextOptions<HamsterDbContext> options) : DbCo
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Hamster>()
-            .Property(h => h.PricePerDay)
-            .HasPrecision(18, 2);
+        // ORSAK: Renare DbContext när jag lägger Entity Configs i separata filer
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(HamsterDbContext).Assembly);
     }
 }
 
