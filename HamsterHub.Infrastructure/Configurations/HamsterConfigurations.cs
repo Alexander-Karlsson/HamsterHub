@@ -28,7 +28,7 @@ public class HamsterConfigurations : IEntityTypeConfiguration<Hamster>
         builder.Property(h => h.Personality)
             .HasConversion<string>(); 
         
-        // ORSAK: En hamster per personlighet som seeddata så att jag kan få visuella resultat när jag skapar front end
+        // ORSAK: En hamster per personlighet (Min enum) som seeddata så att jag kan få visuella resultat när jag skapar front end
         builder.HasData(
             new Hamster { Id = 1, Name = "Mysiga Mårten", Personality = Personality.Kelig, PricePerDay = 99, IsAvailable = true, WeightInGrams = 180, AgeInMonths = 8, Img = "", Description = "Världens mjukaste hamster." },
             new Hamster { Id = 2, Name = "Kleffe", Personality = Personality.Lat, PricePerDay = 75, IsAvailable = true, WeightInGrams = 95, AgeInMonths = 14, Img = "", Description = "Kleffe gör absolut ingenting." },
