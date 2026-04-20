@@ -46,14 +46,12 @@ public class BookingsController(IBookingService service) : ControllerBase
         try
         {
             await service.AddAsync(newBooking);
+            return Created();
         }
         catch (InvalidOperationException ex)
         {
-            return Conflict(ex.Message); // Bör returnera 409 om jag inte gjort fel
+            return Conflict(ex.Message); 
         }
-
-        await service.AddAsync(newBooking);
-        return Created();
     }
 
     [HttpPut("{id}")]

@@ -23,16 +23,24 @@ builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<IHamsterService, HamsterService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 
-// ORSAK: Cors för att anväda React 
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReactApp", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
 });
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // ORSAK: Serialiserar enums som strängar i JSON istället för siffror.
+        options.JsonSerializerOptions.Converters.Add(
+            new System.Text.Json.Serialization.JsonStringEnumConverter());
+    });
 
 //ORSAK: Skapar app-delen och middleware
 
@@ -43,9 +51,9 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseCors("AllowReactApp");
-app.UseHttpsRedirection();
-app.UseAuthorization();
+app.UseCors("AllowAll");
+// app.UseHttpsRedirection();
+// app.UseAuthorization();
 app.MapControllers(); // UseRouting ingår här numera, därav ingen separat app.UseRouting.
 
 app.Run();
@@ -68,24 +76,5 @@ app.Run();
 
 
 
-// // Add services to the container.
-// // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-// builder.Services.AddOpenApi();
-//
-//
-//
-// var app = builder.Build();
-//
-// // Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
-//     app.MapOpenApi();
-// }
-//
-// app.UseHttpsRedirection();
-//
-//
-//
-// app.Run();
 
 
