@@ -12,6 +12,8 @@ public interface IBookingRepository
     Task DeleteAsync(int id);
     
     // Övrig hantering -----------------
+    Task<bool> IsHamsterAvailableAsync(int hamsterId, DateTime startDate, DateTime endDate,
+        int? excludeBookingId = null);
     Task<IEnumerable<Booking>> GetBookingByCustomerNameAsync(string customerName);
     Task<IEnumerable<Booking>> GetBookingByDateAsync(DateTime date);
     Task<IEnumerable<Booking>> GetBookingsByHamsterIdAsync(int hamsterId);

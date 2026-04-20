@@ -36,14 +36,46 @@ public class BookingsController(IBookingService service) : ControllerBase
         {
             CustomerName = dto.CustomerName,
             CustomerEmail = dto.CustomerEmail,
+            CustomerAddress = dto.CustomerAddress,
             HamsterId = dto.HamsterId,
             StartDate = dto.StartDate,
             EndDate = dto.EndDate,
             Purpose = dto.Purpose,
         };
-        
+
+        try
+        {
+            await service.AddAsync(newBooking);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(ex.Message); // Bör returnera 409 om jag inte gjort fel
+        }
+
         await service.AddAsync(newBooking);
         return Created();
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, CreateBookingDto dto)
+    {
+        var booking = await service.GetByIdAsync(id);
+        if(booking is null) return NotFound();
+        
+        booking.StartDate = dto.StartDate;
+        booking.EndDate = dto.EndDate;
+        booking.HamsterId = dto.HamsterId;
+
+        try
+        {
+            await service.UpdateAsync(booking);
+            return NoContent();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(ex.Message);
+        }
+        
     }
 
     [HttpDelete("{id}")]

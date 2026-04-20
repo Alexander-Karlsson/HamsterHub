@@ -12,14 +12,35 @@ public class BookingService(IBookingRepository repo) : IBookingService
     public async Task<Booking?> GetByIdAsync(int id) => 
         await repo.GetByIdAsync(id);
 
-    public async Task AddAsync(Booking booking) =>
+    public async Task AddAsync(Booking booking)
+    {
+        var available = await repo
+            .IsHamsterAvailableAsync(booking.HamsterId, booking.StartDate, booking.EndDate);
+        
+        if(!available)
+            throw new InvalidOperationException($"Vald hamster har redan en boking under perioden: {booking.StartDate} - {booking.EndDate}.");
+        
         await repo.AddAsync(booking);
+    }
     
-    public async Task UpdateAsync(Booking booking) =>
-        await repo.UpdateAsync(booking);
+    public async Task UpdateAsync(Booking booking)
+    {
+        var available = await repo
+            .IsHamsterAvailableAsync(booking.HamsterId, booking.StartDate, booking.EndDate);
+        
+        if(!available)
+            throw new InvalidOperationException($"Vald hamster har redan en boking under perioden: {booking.StartDate} - {booking.EndDate}.");
 
+        await repo.UpdateAsync(booking);
+    }
+    
     public async Task DeleteAsync(int id) =>
         await repo.DeleteAsync(id);
+
+    // TANKEBANA: Undvika dubbelbokning av redan bokad hamster.
+    public async Task<bool> IsHamsterAvailableAsync(int hamsterId, DateTime startDate, DateTime endDate,
+        int? excludeBookingId = null) =>
+        await repo.IsHamsterAvailableAsync(hamsterId, startDate, endDate, excludeBookingId);
     
     // TANKEBANA: Skapa möjligheten att filtrera fram booking genom att söka på kundnamn.
     public async Task<IEnumerable<Booking>> GetBookingByCustomerNameAsync(string customerName) =>
@@ -32,6 +53,5 @@ public class BookingService(IBookingRepository repo) : IBookingService
     // TANKEBANA: Skapa möjligheten att filtrera fram alla bokningar för angiven hamster.
     public async Task<IEnumerable<Booking>> GetBookingsByHamsterIdAsync(int hamsterId) =>
         await repo.GetBookingsByHamsterIdAsync(hamsterId);
-
-
+    
 }

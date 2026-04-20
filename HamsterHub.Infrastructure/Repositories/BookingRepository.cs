@@ -6,11 +6,19 @@ namespace HamsterHub.Infrastructure.Repositories;
 
 public class BookingRepository(HamsterDbContext db) : IBookingRepository
 {
+    private IQueryable<Booking> GetBookingsWithIncludes()
+        => db.Bookings
+            .AsNoTracking()
+            .Include(b => b.Hamster);
+    
+    
     public async Task<IEnumerable<Booking>> GetAllAsync() =>
-        await db.Bookings.AsNoTracking().ToListAsync();
+        await GetBookingsWithIncludes()
+            .ToListAsync();
 
     public async Task<Booking?> GetByIdAsync(int id) =>
-        await db.Bookings.AsNoTracking().FirstOrDefaultAsync(h => h.Id == id)
+        await GetBookingsWithIncludes()
+            .FirstOrDefaultAsync(h => h.Id == id)
         ?? throw new KeyNotFoundException($"Bokning med referens: {id} hittades inte...");
 
     public async Task AddAsync(Booking booking)
@@ -36,9 +44,22 @@ public class BookingRepository(HamsterDbContext db) : IBookingRepository
     }
 
     // Övrig hantering -----------------
+    public async Task<bool> IsHamsterAvailableAsync(int hamsterId, DateTime startDate, DateTime endDate,
+        int? excludeBookingId = null)
+    {
+        return !await db.Bookings
+            .Where(b => b.HamsterId == hamsterId
+            && b.Id != (excludeBookingId ?? -1)
+            && b.StartDate < endDate
+            && b.EndDate > startDate)
+            .AnyAsync();
+    }
+    
     public async Task<IEnumerable<Booking>> GetBookingByCustomerNameAsync(string customerName)
     {
-        var bookings = db.Bookings.Where(b => b.CustomerName.Contains(customerName));
+        var bookings = GetBookingsWithIncludes()
+            .Where(b => b.CustomerName.Contains(customerName));
+        
         var result = await bookings.ToListAsync();
         if (result.Count == 0)
             throw new KeyNotFoundException($"Bokning för {customerName} hittades inte...");
@@ -48,7 +69,9 @@ public class BookingRepository(HamsterDbContext db) : IBookingRepository
 
     public async Task<IEnumerable<Booking>> GetBookingByDateAsync(DateTime date)
     {
-        var bookings = db.Bookings.Where(b => b.StartDate <= date && b.EndDate >= date);
+        var bookings = GetBookingsWithIncludes()
+            .Where(b => b.StartDate <= date && b.EndDate >= date);
+        
         var result = await bookings.ToListAsync();
         if(result.Count == 0)
             throw new KeyNotFoundException($"Hittade inga bokningar på {date}...");
@@ -58,7 +81,9 @@ public class BookingRepository(HamsterDbContext db) : IBookingRepository
     
     public async Task<IEnumerable<Booking>> GetBookingsByHamsterIdAsync(int hamsterId)
     {
-        var bookings = db.Bookings.Where(b => b.HamsterId == hamsterId);
+        var bookings = GetBookingsWithIncludes()
+            .Where(b => b.HamsterId == hamsterId);
+        
         var result = await bookings.ToListAsync();
         if (result.Count == 0)
             throw new KeyNotFoundException("Hittade inga bokingar för den angivna hamstern...");
