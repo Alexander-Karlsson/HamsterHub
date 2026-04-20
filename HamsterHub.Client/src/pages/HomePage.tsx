@@ -2,28 +2,43 @@ import { useEffect, useState } from 'react';
 import type { HamsterDto } from '../types/types';
 import { getAllHamsters } from '../api/hamsterApi';
 import { hamsterImages } from '../assets/hamsters';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import NewsLetterModal from '../components/NewsLetterModal';
 import '../App.css';
 
 function HomePage() {
   const [hamsters, setHamsters] = useState<HamsterDto[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showNewsletter, setShowNewsletter] = useState(false);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     getAllHamsters()
       .then(setHamsters)
       .finally(() => setLoading(false));
   }, []);
 
+    useEffect(() => {
+    const dismissed = localStorage.getItem('newsletter_dismissed');
+    if (!dismissed) {
+      const timer = setTimeout(() => setShowNewsletter(true), 1200);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleClose = () => {
+    localStorage.setItem('newsletter_dismissed', 'true');
+    setShowNewsletter(false);
+  };
+
   return (
     <div className="app">
       <header className="hero">
         <div className="hero-inner">
-          <p className="eyebrow">Sveriges Största hamstermäklare 2025</p>
-          <h1 className="logo">HamsterHub</h1>
-          <p className="tagline">Hyr den ultimata hamstern snabbt, enkelt och på dina villkor.</p>
-          <button className="cta">Utforska våra gnagare</button>
+          <p className="eyebrow">⭐️ Sveriges största hamstermäklare 2025 ⭐️</p>
+          <h1 className="logo">HAMSTERHUB</h1>
+          <p className="tagline">Hyr din ultimata gnagare snabbt, enkelt och på dina villkor.</p>
+          <button className="cta">Utforska oss 🐹</button>
         </div>
       </header>
 
@@ -65,7 +80,9 @@ function HomePage() {
             ))}
           </div>
         )}
-      </main>
+      </main> 
+
+      {showNewsletter && <NewsLetterModal onClose={handleClose} />}
     </div>
   );
 }

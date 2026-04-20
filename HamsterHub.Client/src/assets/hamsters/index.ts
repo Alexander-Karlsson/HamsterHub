@@ -13,11 +13,11 @@ import hamster_9 from './hamster_9.webp';
 // ID:n matchar seed-datan i HamsterConfigurations.cs.
 export const hamsterImages: Record<number, string> = {
   1: hamster_1,
-  2: hamster_2,
+  2: hamster_6,
   3: hamster_3,
   4: hamster_4,
   5: hamster_5,
-  6: hamster_6,
+  6: hamster_2,
   7: hamster_7,
   8: hamster_8,
   9: hamster_9

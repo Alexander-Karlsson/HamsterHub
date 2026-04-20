@@ -202,3 +202,99 @@
   animation: fadeInUp 0.4s ease forwards;
   opacity: 0;
 }
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 26, 24, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeInUp 0.3s ease forwards;
+}
+
+.modal {
+  background: white;
+  padding: 2.5rem;
+  max-width: 420px;
+  width: 90%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.modal-close:hover { color: var(--dark); }
+
+.modal-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.modal h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.modal-body {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.modal-form {
+  display: flex;
+  gap: 0;
+  margin-top: 0.5rem;
+}
+
+.modal-form input {
+  flex: 1;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border);
+  border-right: none;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.modal-form input:focus { border-color: var(--dark); }
+
+.modal-form button {
+  padding: 0.65rem 1.25rem;
+  background: var(--dark);
+  color: var(--cream);
+  border: none;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.modal-form button:hover { opacity: 0.85; }
+
+.modal-success {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.95rem;
+}

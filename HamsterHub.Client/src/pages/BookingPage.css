@@ -199,3 +199,41 @@
 }
 
 .booking-success button:hover { opacity: 0.85; }
+
+
+@media (max-width: 768px) {
+  .booking-page {
+    padding: 1.25rem;
+  }
+
+  .booking-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .summary-img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hamster-summary {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .summary-img {
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+  }
+
+  .hamster-summary h2 {
+    font-size: 1.2rem;
+  }
+}
