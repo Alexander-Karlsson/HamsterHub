@@ -1,12 +1,15 @@
 
-function App() {
-  
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import BookingPage from './pages/BookingPage';
 
+function App() {
   return (
-    <>
-     <h1>HamsterHub 🐹</h1>
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/book/:id" element={<BookingPage />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
