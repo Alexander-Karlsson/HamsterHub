@@ -23,7 +23,7 @@ builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<IHamsterService, HamsterService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 
-// ORSAK: Cors blockerar anrop mellan olika portar/domäner. 
+// ORSAK: Cors för att anväda React 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>

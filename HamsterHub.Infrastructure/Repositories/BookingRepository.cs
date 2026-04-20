@@ -48,7 +48,7 @@ public class BookingRepository(HamsterDbContext db) : IBookingRepository
 
     public async Task<IEnumerable<Booking>> GetBookingByDateAsync(DateTime date)
     {
-        var bookings = db.Bookings.Where(b => b.StartDate >= date && b.EndDate <= date);
+        var bookings = db.Bookings.Where(b => b.StartDate <= date && b.EndDate >= date);
         var result = await bookings.ToListAsync();
         if(result.Count == 0)
             throw new KeyNotFoundException($"Hittade inga bokningar på {date}...");
