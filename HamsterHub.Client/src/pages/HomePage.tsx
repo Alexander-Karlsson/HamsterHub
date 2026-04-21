@@ -67,7 +67,8 @@ function HomePage() {
                 </div>
                 <div className="card-body">
                   <h3>{h.name}</h3> 
-                  <span className="personality">{h.personality}</span>   
+                  <span className="personality">{h.personality}</span>
+                  <p className="description">{h.weightInGrams}g</p>   
                   <p className="description">{h.description}</p>
                 </div>
                 <div className="card-footer">

@@ -53,7 +53,7 @@ function BookingPage() {
       await createBooking(request);
       setSuccess(true);
     } catch {
-      setError(`${hamster.name} är tyvärr inte tillgänglig under den valda perioden.`);
+      setError(`${hamster?.name} är tyvärr inte tillgänglig under den valda perioden.`);
     }
   };
 
@@ -83,6 +83,7 @@ function BookingPage() {
             </div>
             <h2>{hamster.name}</h2>
             <span className="personality">{hamster.personality}</span>
+            <p className="description">{hamster.weightInGrams}g</p>
             <p className="description">{hamster.description}</p>
             <div className="price-tag">
               {hamster.pricePerDay} kr<small>/dag</small>
