@@ -7,6 +7,7 @@ export interface HamsterDto {
     personality: string;
     pricePerDay: number;
     isAvailable: boolean;
+    averageScore: number;
 }
 
 export interface BookingDto {
@@ -40,4 +41,20 @@ export interface AddHamsterRequest {
     ageInMonths: number;
     personality: string;
     pricePerDay: number;
+}
+
+export interface ReviewDto {
+    id: number;
+    hamsterId: number;
+    customerName: string;
+    score: number;
+    comment: string;
+    reviewCreatedDate: string;
+}
+
+export interface CreateReviewRequest {
+    hamsterId: number;
+    customerName: string;
+    score: number;
+    comment: string;
 }

@@ -18,10 +18,12 @@ builder.Services.AddDbContext<HamsterDbContext>(options =>
 // Repositories -----
 builder.Services.AddScoped<IHamsterRepository, HamsterRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 // Services -----
 builder.Services.AddScoped<IHamsterService, HamsterService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
 
 
 builder.Services.AddCors(options =>

@@ -4,6 +4,7 @@ import { getAllHamsters } from '../api/hamsterApi';
 import { hamsterImages } from '../assets/hamsters';
 import { useNavigate } from 'react-router-dom';
 import NewsLetterModal from '../components/NewsLetterModal';
+import StarRating from '../components/StarRating';
 import '../App.css';
 
 function HomePage() {
@@ -68,6 +69,7 @@ function HomePage() {
                 <div className="card-body">
                   <h3>{h.name}</h3> 
                   <span className="personality">{h.personality}</span>
+                  <StarRating score={h.averageScore} />
                   <p className="description">{h.weightInGrams}g</p>   
                   <p className="description">{h.description}</p>
                 </div>

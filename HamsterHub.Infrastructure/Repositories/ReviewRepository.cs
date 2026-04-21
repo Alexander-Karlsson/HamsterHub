@@ -6,6 +6,11 @@ namespace HamsterHub.Infrastructure.Repositories;
 
 public class ReviewRepository(HamsterDbContext db) : IReviewRepository
 {
+    public async Task<IEnumerable<Review>> GetAllAsync() =>
+        await db.Reviews
+            .AsNoTracking()
+            .ToListAsync();
+    
     public async Task<IEnumerable<Review>> GetByHamsterIdAsync(int hamsterId) =>
         await db.Reviews
             .AsNoTracking()

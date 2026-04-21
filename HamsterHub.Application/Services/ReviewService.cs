@@ -5,6 +5,9 @@ namespace HamsterHub.Application.Services;
 
 public class ReviewService(IReviewRepository repo) : IReviewService
 {
+    public async Task<IEnumerable<Review>> GetAllAsync() =>
+        await repo.GetAllAsync();
+    
     public async Task<IEnumerable<Review>> GetByHamsterIdAsync(int hamsterId) =>
         await repo.GetByHamsterIdAsync(hamsterId);
     

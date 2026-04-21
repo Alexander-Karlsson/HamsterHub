@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { HamsterDto, BookingDto, CreateBookingRequest, AddHamsterRequest } from '../types/types';
+import type { HamsterDto, BookingDto, CreateBookingRequest, AddHamsterRequest, ReviewDto, CreateReviewRequest } from '../types/types';
 
 const api = axios.create({
     baseURL: 'http://localhost:5109/api'
@@ -70,4 +70,17 @@ export const createBooking = async (request: CreateBookingRequest): Promise<void
 
 export const deleteBooking = async (id: number): Promise<void> => {
     await api.delete(`/bookings/${id}`);
+}
+
+// REVIEW ENDPINTS ------------------------------
+
+export const getReviewsByHamsterId = async (hamsterId: number): Promise<ReviewDto[]> => {
+    const response = await api.get<ReviewDto[]>(`/reviews/hamster/${hamsterId}`)
+    return response.data;
+}
+
+// POST
+
+export const createReview = async (request: CreateReviewRequest): Promise<void> => {
+    await api.post('/reviews', request);
 }

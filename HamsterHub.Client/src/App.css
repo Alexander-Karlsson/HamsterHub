@@ -298,3 +298,26 @@
   padding: 1rem 0;
   font-size: 0.95rem;
 }
+
+/* Review CSS */
+
+.star-rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.star {
+    font-size: 14px;
+    color: var(--border);
+}
+
+.star.filled {
+    color: var(--accent);
+}
+
+.score-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-left: 4px;
+}
