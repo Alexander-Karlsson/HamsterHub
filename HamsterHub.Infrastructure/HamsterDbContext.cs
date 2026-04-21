@@ -7,6 +7,7 @@ public class HamsterDbContext(DbContextOptions<HamsterDbContext> options) : DbCo
 {
     public DbSet<Hamster> Hamsters { get; set; }
     public DbSet<Booking> Bookings { get; set; }
+    public DbSet<Review> Reviews { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

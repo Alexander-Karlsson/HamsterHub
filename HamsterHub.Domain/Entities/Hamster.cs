@@ -12,4 +12,6 @@ public class Hamster
     public Personality Personality { get; set; }
     public decimal PricePerDay { get; set; }
     public bool IsAvailable { get; set; } = true;
+
+    public ICollection<Review> Reviews { get; set; } = [];
 }
