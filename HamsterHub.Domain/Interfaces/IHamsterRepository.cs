@@ -12,7 +12,6 @@ public interface IHamsterRepository
     Task UpdateAsync(Hamster hamster);
     Task DeleteAsync(int id);
     
-    // Övrig hantering -----------------
     Task<IEnumerable<Hamster>> GetByPersonalityAsync(Personality personality);
     Task<Hamster?> GetCheapestAvailableAsync();
     

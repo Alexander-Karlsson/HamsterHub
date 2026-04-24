@@ -38,7 +38,7 @@ function HomePage() {
         <div className="hero-inner">
           <p className="eyebrow">⭐️ Sveriges största hamstermäklare 2025 ⭐️</p>
           <h1 className="logo">HAMSTERHUB</h1>
-          <p className="tagline">Hyr din ultimata gnagare snabbt, enkelt och på dina villkor.</p>
+          <p className="tagline">Hyr din ultimata hamster snabbt, enkelt och på dina villkor.</p>
           <button className="cta">Utforska oss 🐹</button>
         </div>
       </header>

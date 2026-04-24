@@ -37,7 +37,7 @@ public class BookingService(IBookingRepository repo) : IBookingService
     public async Task DeleteAsync(int id) =>
         await repo.DeleteAsync(id);
 
-    // TANKEBANA: Undvika dubbelbokning av redan bokad hamster.
+    // TANKEBANA: Undvika dubbelbokning.
     public async Task<bool> IsHamsterAvailableAsync(int hamsterId, DateTime startDate, DateTime endDate,
         int? excludeBookingId = null) =>
         await repo.IsHamsterAvailableAsync(hamsterId, startDate, endDate, excludeBookingId);

@@ -5,7 +5,7 @@ const api = axios.create({
     baseURL: 'http://localhost:5109/api'
 });
 
-// HAMSTER ENDPOINTS ----------------------------------------
+// HAMSTER  ----------------------------------------
 
 export const getAllHamsters = async ():Promise<HamsterDto[]> => {
     const response = await api.get<HamsterDto[]>('/hamsters');
@@ -33,7 +33,7 @@ export const addHamster = async(request: AddHamsterRequest): Promise<void> => {
     await api.post('/hamsters', request);
 }
 
-// BOOKING ENDPOINTS ----------------------------------------
+// BOOKING  ----------------------------------------
 
 export const getAllBookings = async ():Promise<BookingDto[]> => {
     const response = await api.get<BookingDto[]>('/bookings')
@@ -72,7 +72,7 @@ export const deleteBooking = async (id: number): Promise<void> => {
     await api.delete(`/bookings/${id}`);
 }
 
-// REVIEW ENDPINTS ------------------------------
+// REVIE ------------------------------
 
 export const getReviewsByHamsterId = async (hamsterId: number): Promise<ReviewDto[]> => {
     const response = await api.get<ReviewDto[]>(`/reviews/hamster/${hamsterId}`)

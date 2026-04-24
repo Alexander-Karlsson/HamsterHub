@@ -28,7 +28,7 @@ public class AdminMenu(ApiService api) : BaseMenu(api)
         await base.ShowAsync();
     }
 
-    // TANKEBANA: Döljer lösenord med * när det skrivs in.
+    
     private static string ReadPassword()
     {
         var password = "";
@@ -38,6 +38,7 @@ public class AdminMenu(ApiService api) : BaseMenu(api)
             key = Console.ReadKey(true);
             if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
             {
+                // TANKEBANA: Istället för att implementera hash så döljer jag lösenord bara med "*"
                 password += key.KeyChar;
                 Console.Write("*");
             }
@@ -67,7 +68,7 @@ public class AdminMenu(ApiService api) : BaseMenu(api)
         Console.WriteLine("  -- Queries --------------------");
         Console.WriteLine("  [7] Filtrera på personlighet");
         Console.WriteLine("  [8] Billigaste tillgängliga");
-        Console.WriteLine("  [0] Logga ut");
+        Console.WriteLine("\n  [0] Logga ut");
     }
 
     protected override async Task HandleInputAsync(string input)
@@ -126,7 +127,7 @@ public class AdminMenu(ApiService api) : BaseMenu(api)
         var name = PromptLine("Namn");
         var description = PromptLine("Beskrivning");
         var weight= PromptInt("Vikt i gram");
-        var age = (double)PromptDecimal("Ålder i månader");
+        var age = (double)PromptDecimal("Ålder i månader"); // Visas aldrig
         var price = PromptDecimal("Pris per dag (kr)");
         
         Console.WriteLine("\n  Personligheter: Kelig, Aggresiv, Oförutsägbar, Kärleksfull,");
@@ -140,7 +141,7 @@ public class AdminMenu(ApiService api) : BaseMenu(api)
             PrintSuccess($"{name} har lagts till i hamstergänget!");
         
         else         
-            PrintError("Misslyckades – (kontrollera att API är igång förfan!!).");
+            PrintError("Misslyckades – (kontrollera att API är igång!!).");
 
         Pause();
     }

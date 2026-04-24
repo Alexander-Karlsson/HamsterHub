@@ -14,8 +14,8 @@ import hamster_15 from './hamster_15.webp';
 import hamster_16 from './hamster_16.jpg';
 
 
-// TANKEBANA: Mappar hamster-ID mot lokal bildfil.
-// ID:n matchar seed-datan i HamsterConfigurations.cs.
+// TANKEBANA: Mappar hamsterID mot lokalt sparad bildfil.
+// ID matchar alltså min seed-data.
 export const hamsterImages: Record<number, string> = {
   1: hamster_1,
   2: hamster_6,

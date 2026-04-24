@@ -8,8 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-
-// ORSAK: Registrerar min DbContext i DI-containern (scoped livslängd)
 builder.Services.AddDbContext<HamsterDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -39,12 +37,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        // ORSAK: Serialiserar enums som strängar i JSON istället för siffror.
+        // ORSAK: Vill serialisera min enum som sträng i JSON istället för siffror.
         options.JsonSerializerOptions.Converters.Add(
             new System.Text.Json.Serialization.JsonStringEnumConverter());
     });
 
-//ORSAK: Skapar app-delen och middleware
+
 
 var app = builder.Build();
 
@@ -54,9 +52,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowAll");
-// app.UseHttpsRedirection();
-// app.UseAuthorization();
-app.MapControllers(); // UseRouting ingår här numera, därav ingen separat app.UseRouting.
+
+app.MapControllers(); 
 
 app.Run();
 
